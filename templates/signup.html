@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Screenshot 2025-02-14 221343.png') }}" />
-    <title>QALA~signup</title>
+    <title>Flip Card Login & Signup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -19,7 +19,7 @@
             align-items: center;
             height: 100vh;
             font-family: 'Arial', sans-serif;
-            background: url("{{ url_for('static', filename='images/pic.jpg') }}") no-repeat center center fixed;
+            background: url('pic2.jpeg') no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -59,7 +59,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: transparent;
+            background: transparent; 
         }
 
         .card-side.back {
@@ -67,7 +67,7 @@
         }
 
         h1 {
-            color: black;
+            color:black;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -86,7 +86,7 @@
             border-radius: 10px;
             font-size: 16px;
             background: transparent;
-            color: black;
+            color:black;
         }
 
         .input-container .icon {
@@ -94,14 +94,17 @@
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            color: black;
+            color:black;
         }
 
-        .input-container .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
+        .input-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color:white;
+            cursor: pointer;
+            font-size: 18px;
         }
 
         button {
@@ -111,7 +114,7 @@
             border: none;
             border-radius: 10px;
             background-color: rgba(255, 255, 255, 0.3);
-            color: black;
+            color:black;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -124,30 +127,15 @@
         .switch-link {
             margin-top: 20px;
             text-align: center;
-            color: black;
+            color:black;
             cursor: pointer;
             text-decoration: underline;
         }
 
-        .popup {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 10;
-            text-align: center;
-        }
 
-        .popup.show {
-            display: block;
-        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -157,16 +145,17 @@
                     <h1>Sign Up</h1>
                     <div class="input-container">
                         <i class="fas fa-user icon"></i>
-                        <input type="text" id="signup-name" placeholder="Enter Your Name" />
+                        <input type="text" placeholder="Enter Your Name" />
                     </div>
                     <div class="input-container">
                         <i class="fas fa-envelope icon"></i>
-                        <input type="email" id="signup-email" placeholder="Enter Email" />
+                        <input type="email" placeholder="Enter Email" />
                     </div>
                     <div class="input-container">
-                        <input type="password" id="signup-password" placeholder="Create Password" />
+                        <input type="password" placeholder="Create Password" />
+                        <i class="fas fa-eye toggle-password"></i>
                     </div>
-                    <button onclick="signUp()">Sign Up</button>
+                    <button onclick="flipCard()">Sign Up</button>
                     <span class="switch-link" onclick="flipCard()">Already have an account? Sign In</span>
                 </div>
 
@@ -174,86 +163,25 @@
                     <h1>Sign In</h1>
                     <div class="input-container">
                         <i class="fas fa-envelope icon"></i>
-                        <input type="email" id="signin-email" placeholder="Enter Email" />
+                        <input type="email" placeholder="Enter Email" />
                     </div>
                     <div class="input-container">
-                        <input type="password" id="signin-password" placeholder="Enter Password" />
+                        <input type="password" placeholder="Enter Password" />
+                        <i class="fas fa-eye toggle-password"></i>
                     </div>
-                    <button onclick="signIn()">Sign In</button>
+                    <button onclick="flipCard()">Sign In</button>
                     <span class="switch-link" onclick="flipCard()">Don't have an account? Sign Up</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="popup" id="popup"></div>
-
     <script>
         function flipCard() {
             document.getElementById('card').classList.toggle('is-flipped');
         }
-
-        async function signUp() {
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-
-            const response = await fetch('/signup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const data = await response.json();
-            showPopup(data.message || data.error);
-        }
-
-        async function signIn() {
-            const email = document.getElementById('signin-email').value;
-            const password = document.getElementById('signin-password').value;
-
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-            showPopup(data.message || data.error);
-            if (response.ok) {
-                setTimeout(() => { window.location.href = '/home'; }, 2000);
-            }
-        }
-
-        function showPopup(message) {
-            const popup = document.getElementById('popup');
-            popup.innerText = message;
-            popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 2000);
-        }
-        async function signIn() {
-    const email = document.getElementById('signin-email').value;
-    const password = document.getElementById('signin-password').value;
-
-    const response = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-        showPopup(data.message);  
-        setTimeout(() => {
-            window.location.href = data.redirect;  // Redirect to main.html
-        }, 2000);
-    } else {
-        showPopup(data.error);  // Show error message
-    }
-}
-
     </script>
 
 </body>
+
 </html>
