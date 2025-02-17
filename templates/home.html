@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Cinzel+Decorative&family=Poppins:wght@300;400;700&family=Cormorant+Garamond:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Prata&family=Marcellus&family=Kaushan+Script&family=Alex+Brush&family=Elsie&family=Quintessential&family=Italianno&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Screenshot 2025-02-14 221343.png') }}" />
+    <title>QALA</title>
+    <style>
+        /* Basic styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100%;
+            background: white;
+            scroll-behavior: smooth;
+        }
+
+        /* Header styling */
+        header {    
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 1px;
+            position: fixed;
+            background:black; /* Slight transparency */
+            box-shadow: 0 4px 6px black;
+            top: -100px;  /* Initially hidden */
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: top 0.5s ease-in-out;
+            color: white;
+        }
+        header img {
+        margin-right: 10px; /* Adjust space between image and text */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: bold;
+            color: white; /* Gold color for luxury effect */
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            margin-left: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+          color: #f4f3ef;
+            border: 2px solid silver; 
+            box-shadow: 0px 0px 10px silver;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 10px 20px; /* Add padding for space inside the border */
+            display: inline-block;
+        }
+
+        /* Main image section */
+        #main-content {
+            height: 100vh; /* Full height */
+            background-image: url("{{ url_for('static', filename='images/freepik__the-style-is-candid-image-photography-with-natural__96127.png') }}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #main-content:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            z-index: 1;
+        }
+
+        /* Info card styling */
+        .info-card {
+            width: 80%;
+            max-width: 900px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin: 50px auto; /* Center it */
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .info-card p {
+            font-size: 1.2rem;
+            color: #1f2402;
+            line-height: 1.6;
+        }
+        .art-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            width: 80%;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .art-text {
+            flex: 1;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-style: italic;
+            color: #070600;
+        }
+
+        .art-card {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .art-card:hover {
+            transform: scale(1.05);
+        }
+
+        .art-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .artist-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            width: 80%;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .artist-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #070600;
+        }
+
+        .artist-card {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .artist-card:hover {
+            transform: scale(1.05);
+        }
+
+        .artist-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .Virtual-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            width: 80%;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .Virtual-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #070600;
+        }
+
+        .Virtual-card {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .Virtual-card:hover {
+            transform: scale(1.05);
+        }
+
+        .Virtual-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .art-work {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px; /* Adjust height as needed */
+    }
+      .art-work img {
+        text-align: center;
+      }
+      /* Featured Artwork Section */
+.featured-art {
+    text-align: center;
+    margin: 50px auto;
+}
+
+.featured-art h1 {
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    color: black;
+}
+
+/* Card Container */
+.featured-art-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1100px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    margin: 0 auto;
+}
+
+/* Individual Card */
+.card {
+    background: white;
+    width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+/* Footer Styling */
+footer {
+    background: black;
+    color: white;
+    padding: 50px 20px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h2 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: white; /* Gold accent color */
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+/* Social Media Icons */
+.footer-section.social a {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.3s;
+}
+
+.footer-section.social a:hover {
+    color:white;
+}
+
+/* Newsletter */
+.footer-section.newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-section.newsletter input {
+    padding:5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.footer-section.newsletter button {
+    padding: 10px;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.footer-section.newsletter button:hover {
+    background:rgb(63, 60, 60);
+}
+
+/* Copyright Section */
+.footer-bottom {
+    text-align: center;
+    padding: 15px;
+    background: #070505;
+    margin-top: 20px;
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <!-- Header -->
+    <header id="header">
+        <img src="{{ url_for('static', filename='images/Qala.png') }}" height="90px" width="100px">
+        <h1>Qala</h1>
+        <nav>
+            <a href="#" style="color: #f4f3ef;
+            border: 2px solid silver; 
+            box-shadow: 0px 0px 10px silver;
+            background: rgba(255, 255, 255, 0.1);border-radius: 30px;padding: 10px 20px; display: inline-block; ">Home</a>
+            <a href="#" style="padding: 10px 20px;">About</a>
+            <a href="#" style="padding: 10px 20px;">Contact Us</a>
+            <a href="{{ url_for('signup') }}" style="padding: 10px 20px;">Sign UP</a>
+        </nav>
+    </header>
+
+    <!-- Main Image Section -->
+    <section id="main-content">
+        <!-- Background image is applied via CSS -->
+    </section>
+
+    <!-- Info Card Section -->
+    <div class="info-card">
+        <h2>What is Qala</h2>
+        <p style="font-family: 'Marcellus', serif; color: rgb(45, 45, 2);">"Qala – A Celebration of Art, Expression & Timeless Beauty"</p>
+
+        <p style="font-family: 'Cormorant Garamond', serif;">Art is more than just paint on a canvas; it is a reflection of the soul, an unspoken language of the heart. Canvas Ki Gali is a sanctuary for artists and dreamers—a place where imagination takes form, where strokes of genius meet boundless creativity.</p>
+          
+          <p style="font-family: 'Cormorant Garamond', serif;">🖌 Each masterpiece tells a story, each color evokes an emotion.</p>
+          <p style="font-family: 'Cormorant Garamond', serif;">🎨 Art here is not confined to frames—it flows, breathes, and inspires.</p>
+          <p style="font-family: 'Cormorant Garamond', serif;">🌿 Every visitor steps into a world where passion meets elegance.</p>
+          
+          <p style="font-family: 'Cormorant Garamond', serif;">Step into Qala, where every piece of art is a journey, every stroke is a feeling, and every visitor is a part of the experience.</p>
+          
+          <p style="font-family: 'Cormorant Garamond', serif;;">"Art is not seen. It is felt."</p>
+    </div>
+    <div class="art-section">
+      <div class="art-text">
+          “Art is not just what we see, <br>
+          It is what we feel when we look at it. <br>
+          Every brushstroke holds a story, <br>
+          And every color speaks a silent emotion.”
+      </div>
+      
+      <div class="art-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKGr3DIIh3qzwQb8iORx22ImF3VqFb8Ht2g&s" alt="Beautiful Artwork">
+      </div>
+    </div>
+    <div class="artist-section">
+      <div class="artist-card">
+        <img src="https://i.pinimg.com/736x/5b/e1/ec/5be1ecdabf66ad6600eb5e7837570a44.jpg" alt="Beautiful Artwork">
+    </div>
+      <div class="artist-text">
+        <h1 style="font-family: 'Quintessential', cursive;">Connect with artist</h1>
+        At Qala, art is a conversation. Whether you’re inquiring about a piece, requesting custom art, or exploring collaborations, we make it easy to connect directly with artists.<br>
+
+        ✦How can we help?<br>
+        ✦Inquire about Artwork<br>
+        ✦Custom Art Requests<br>
+        ✦Collaborations<br>
+        ✦General Questions
+
+      </div>
+    </div>
+    <div class="Virtual-section">
+      <div class="Virtual-text">
+        <h1 style="font-family: 'Quintessential', cursive;">🎨 Virtual Art Exhibitions</h1>
+        Experience art like never before!<br>
+        Explore exclusive exhibitions from the comfort of your home with our 3D virtual gallery. Walk through immersive spaces, view stunning artworks up close, and interact with artists in live sessions.<br>
+        
+        <p style="font-weight: bolder;">Join us for the next exhibition!</p>
+      </div>
+      
+      <div class="Virtual-card">
+          <img src="https://i.pinimg.com/736x/8a/d8/44/8ad8446c7a94999399bc4c7e39fc7332.jpg" alt="Beautiful Artwork">
+      </div>
+    </div>
+    <div class="art-work">
+        <img src="{{ url_for('static', filename='images/loogo.png') }}" alt="logo" height="400px" width="400px">
+    </div>
+    <!-- Featured Artwork Section -->
+<div class="featured-art">
+  <h1>Featured Artwork</h1>
+  <div class="featured-art-container">
+      <div class="card">
+          <img src="https://serbianaart.com/uploads/5509/artwork/preview-20231116_135106-655c9d0310921.jpg" alt="Art Gallery">
+      </div>
+      <div class="card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc85srEiTr6PIruBeUwZ7QS17g1Gb0wpkyWA&s" alt="Art Gallery">
+      </div>
+      <div class="card">
+          <img src="https://cdn11.bigcommerce.com/s-x49po/images/stencil/1500x1500/products/124247/291437/handmade%2Fdownscaled%2Fh_mpofxyzu58b_2000x2000__40834.1699073313.jpg?c=2" alt="Art Gallery">
+      </div>
+  </div>
+</div>
+<div class="end">
+  <p align="center" style="font-family:'Cinzel Decorative', serif; font-size: 28px; font-weight: bolder;">Join QALA </p>
+  <p style="margin-left: 700px; font-family:  'Yeseva One', serif; font-size: 28px;;">~ where art finds it's voice.🎨✨</p>
+</div>
+<footer>
+  <div class="footer-container">
+      <!-- About QALA -->
+      <div class="footer-section about">
+          <h2>About QALA</h2>
+          <p>QALA is more than an art gallery—it’s a space where creativity breathes, colors speak, and artists connect with the world.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section links">
+          <h2>Quick Links</h2>
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Gallery</a></li>
+              <li><a href="#">Artists</a></li>
+              <li><a href="#">Virtual Exhibitions</a></li>
+              <li><a href="#">Contact</a></li>
+          </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-section contact">
+          <h2>Contact Us</h2>
+          <p><i class="fas fa-envelope"></i> contact@qalaart.com</p>
+          <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+          <p><i class="fas fa-map-marker-alt"></i> New Delhi, India</p>
+      </div>
+
+      <!-- Social Media -->
+      <div class="footer-section social">
+          <h2>Follow Us</h2>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-section newsletter">
+          <h2>Stay Updated</h2>
+          <form action="#">
+              <input type="email" placeholder="Enter your email">
+              <button type="submit">Subscribe</button>
+          </form>
+      </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+      <p>&copy; 2024 QALA. All Rights Reserved.</p>
+  </div>
+</footer>
+
+    <!-- JavaScript for Scroll-Based Header -->
+    <script>
+        const header = document.getElementById("header");
+
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 50) { // Adjusted for better effect
+                header.style.top = "0";
+            } else {
+                header.style.top = "-100px";
+            }
+        });
+    </script>
+
+</body>
+</html>

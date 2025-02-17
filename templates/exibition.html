@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QALA - Art Exhibition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #000;
+        }
+
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .title {
+            font-size: 64px;
+            font-weight: bold;
+            margin: 0;
+            text-align: center;
+            letter-spacing: 10px;
+        }
+
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Ensures 4 columns */
+    gap: 30px;
+    padding: 20px;
+    max-width: 1300px; /* Increased width to fit all images */
+    margin: 0 auto;
+    row-gap: 50px;
+}
+
+
+        .gallery-item {
+            text-align: center;
+        }
+
+        .gallery img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery p {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .gallery p:hover {
+            text-decoration: underline;
+        }
+
+        /* Pop-up Styles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            width: 700px;
+            height: 500px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            text-align: left;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .popup-card img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .popup-card-content {
+            text-align: center;
+        }
+
+        .popup-card h2 {
+            font-family: 'Playfair Display', serif; /* Example: Fancy font */
+    font-size: 28px; /* Increase title size */
+    font-weight: bold;
+    margin-bottom: 15px;
+        }
+
+        .popup-card p {
+            font-family: 'Arial', sans-serif; /* Example: Simple clean font */
+    font-size: 18px; /* Increase content text size */
+    line-height: 1.6; /* Improve readability */
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .popup-buttons button {
+            background: black;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .popup-buttons button:hover {
+            background: #333;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .slider-container {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        /* Navigation Buttons */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: black;
+        }
+
+        /* Dots for Navigation */
+        .dots-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 5px;
+            background-color: #bbb;
+            display: inline-block;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: black;
+        }
+        h2 {
+    margin-left: 50px; /* Adjust this value to shift further right */
+    font-size: 28px; /* Default size (you can adjust) */
+    font-weight: bold;
+    font-size: 36px; /* Bigger text */
+    font-weight: 700; /* Make it bold */
+}
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    background: linear-gradient(90deg, black,black);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Smooth Fade-in Effect */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="title">QALA</div>
+</header>
+<br><br>
+<h1>WELCOME TO THE ART Exhibition</h1>
+<div class="slider-container">
+    <div class="slides">
+        <div class="slide"><img src="s1.jpeg" alt="Image 1"></div>
+        <div class="slide"><img src="s2.jpeg" alt="Image 2"></div>
+        <div class="slide"><img src="s3.jpeg" alt="Image 3"></div>
+        <div class="slide"><img src="s4.jpeg" alt="Image 4"></div>
+        <div class="slide"><img src="s5.jpeg" alt="Image 1"></div>
+        <div class="slide"><img src="s6.jpeg" alt="Image 2"></div>
+        <div class="slide"><img src="s7.jpeg" alt="Image 3"></div>
+        <div class="slide"><img src="s8.jpeg" alt="Image 4"></div>
+    </div>
+
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</div>
+
+<div class="dots-container">
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+    <span class="dot" onclick="goToSlide(4)"></span>
+    <span class="dot" onclick="goToSlide(5)"></span>
+    <span class="dot" onclick="goToSlide(6)"></span>
+    <span class="dot" onclick="goToSlide(7)"></span>
+    <span class="dot" onclick="goToSlide(8)"></span>
+</div>
+
+
+
+<h2><b>LATEST UPDATES</b></h2>
+<br>
+
+<div class="gallery">
+    <!-- First Row -->
+    <div class="gallery-item">
+        <img src="1.jpg" alt="Image 1">
+        <p onclick="showPopup('079 | STORIES ART GALLERY', '079 | STORIES ART GALLERY  was established in 2018 as a space that caters to the needs of art, design and creativity. Since the inception, the gallery has been a platform for young contemporary artists while also hosting exhibitions of modern masters. Designed by Khushnu and Sönke Hoof, partners to Padmashree and Pritzker awardee B.V. Doshi., the 079 | Stories complex includes the art gallery, a workshop space and an amphitheatre.', '1.jpg', 'https://079stories.com/')">079 | STORIES ART GALLERY</p>
+    </div>
+    <div class="gallery-item">
+        <img src="2.jpg" alt="Image 2">
+        <p onclick="showPopup('1x1 Art Gallery', 'Located in Dubai’s cultural district in Alserkal Avenue, 1X1 Art Gallery focusses on South Asian contemporary artists, whilst also nurturing local talent and artists based in the Middle East. The gallery is known for organising large scale projects, experiments and exhibitions in its space, and also runs a bookstore dedicated to South Asian art, culture and literature. ', '2.jpg', 'https://www.1x1artgallery.com/lander')">1x1 Art Gallery</p>
+    </div>
+    <div class="gallery-item">
+        <img src="3.jpg" alt="Image 3">
+        <p onclick="showPopup('Abir India', 'Abir India, an Ahmedabad-based non-profit foundation established in 2016 by natural dye expert Ruby Jagrut, is a beacon of artistic celebration and mentorship. Inspired by “Abir,” the vibrant hues synonymous with Indian festivals, the organization bridges the gap between emerging artists and the global art community. Through mentorship programs, curated exhibitions, prestigious awards, and innovative digital platforms, Abir India fosters opportunities for artistic growth and recognition.Since its inception, Abir India has supported over 1,000 artists and awarded 72 talents from more than 450 pin codes, shaping transformative careers and enriching the art world in India and beyond.', '3.jpg', 'https://abirindia.org/')">Abir India</p>
+    </div>
+    <div class="gallery-item">
+        <img src="4.jpg" alt="Image 4">
+        <p onclick="showPopup('Aicon', 'Aicon is a New York based art gallery serving as a vital platform for modern and contemporary artists from South Asia, Middle East, Africa diaspora to realize their vision in a global, ever-shifting world. Along with in-depth focused solo shows, the gallery presents a programme of curated group exhibitions linking the contemporary with modern, to produce unexpected congruences, highlight multiple modernisms, and complexify the contemporary., '4.jpg', 'https://www.aicon.art/')">Aicon</p>
+    </div>
+    <!-- Second Row -->
+    <div class="gallery-item">
+        <img src="5.jpeg" alt="Image 5">
+        <p onclick="showPopup('Akar Prakar', 'Founded in 2004 by Reena and Abhijit Lath, Akar Prakar is a modern and contemporary art gallery with spaces in New Delhi and Kolkata.As part of our gallery programming and extended engagements in the arts, Akar Prakar has hosted several visual art exhibitions through collaborations with international museums and curators, creating a space for indigenous representations of Indian modern and contemporary artists. Operating between its two galleries, Akar Prakar curates narratives drawn from the subcontinent’s modern and contemporary art movements, representing artists such as Ganesh Haloi, Jayashree Chakravarty, C. Douglas, Manish Pushkale, Debanjan Roy and Debasish Mukherjee to name a few.Over the years, Akar Prakar has participated in art exhibitions at institutions and museums in different parts of the world, including the National Gallery of Modern Art, Delhi; Chhatrapati Shivaji Maharaj Vastu Sangrahalaya, Mumbai; Kiran Nadar Museum of Art, Delhi; 8th Berlin Biennale; documenta 14; Musée des Arts Asiatiques, Nice; Musée National des Arts Asiatiques Guimet, Paris; DRAF, London; Hamburger Bahnhof, Berlin; Palazzo Madama, Turin; Museo d’Arte Orientale, Turin; Stedelijk Museum, Amsterdam; and Marres, Maastricht to name a few.', '5.jpeg', 'https://www.akarprakar.com/')">Akar Prakar</p>
+    </div>
+    <div class="gallery-item">
+        <img src="6.jpg" alt="Image 6">
+        <p onclick="showPopup('Apparao Galleries', 'Apparao Galleries is a leading Indian gallery with outposts in Chennai and New Delhi. Since its founding in 1983, the gallery has built a strong reputation for representing an exceptional range of modern and contemporary Indian artists. Along with organising compelling exhibitions, Apparao Galleries also runs a critically engaging and ambitious outreach programme to encourage academic research and international exchange.', '6.jpg', 'https://www.instagram.com/apparaogalleriesindia/?hl=en')">Apparao Galleries</p>
+    </div>
+    <div class="gallery-item">
+        <img src="7.jpg" alt="Image 7">
+        <p onclick="showPopup('Archer Art Gallery', 'Archer Art Gallery started its journey as a small graphic studio in 1978. Through the years, Archer’s main focus has been to facilitate high-quality, limited-edition serigraphs and prints by some of the India’s most influential artists including Manjit Bawa, Thota Vaikuntam, Jyoti Bhatt, Anjolie Ela Menon and many more. Additionally, the gallery also exhibits a fine selection of original works by modern masters.', '7.jpg', 'https://www.archerindia.com/')">Archer Art Gallery</p>
+    </div>
+    <div class="gallery-item">
+        <img src="8.jpeg" alt="Image 8">
+        <p onclick="showPopup('Art Alive Gallery', 'Established in 2001, Art Alive Gallery is committed to promoting emerging perspectives in Indian art and nurturing a culture of engagement among artists and art connoisseurs. The gallery presents a holistic showcase of contemporary, modern and emerging art from the country through its curated exhibitions and retrospectives, artist talks and extensively researched books and catalogues.', '8.jpeg', 'https://www.artalivegallery.com/')">Art Alive Gallery</p>
+    </div>
+</div>
+
+<!-- Pop-up Card -->
+<div class="overlay" id="overlay" onclick="hidePopup()"></div>
+<div class="popup-card" id="popupCard">
+    <img id="popupImage" src="" alt="Popup Image">
+    <div class="popup-card-content">
+        <h2 id="popupTitle">Title</h2>
+        <p id="popupContent">Content</p>
+        <div class="popup-buttons">
+            <button onclick="visitSite()" id="visitSiteBtn">Visit Site</button>
+            <button onclick="hidePopup()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+
+        function showSlide(index) {
+            if (index >= slides.length) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = slides.length - 1;
+            } else {
+                currentIndex = index;
+            }
+
+            // Move slides
+            document.querySelector(".slides").style.transform = translateX(-${currentIndex * 100}%);
+
+            // Update dots
+            dots.forEach(dot => dot.classList.remove("active"));
+            dots[currentIndex].classList.add("active");
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentIndex + direction);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        // Auto Slide every 3 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 3000);
+
+        // Initialize
+        showSlide(currentIndex);
+
+
+
+    let visitSiteURL = "";
+
+function showPopup(title, content, imageUrl, siteUrl) {
+    document.getElementById('popupTitle').innerText = title;
+    document.getElementById('popupContent').innerText = content;
+    document.getElementById('popupImage').src = imageUrl;
+    visitSiteURL = siteUrl;
+
+    document.getElementById('popupCard').style.display = 'flex';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+/* Ensure pop-up does NOT show on page load */
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('popupCard').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+});
+
+function hidePopup() {
+    document.getElementById('popupCard').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+function visitSite() {
+    window.open(visitSiteURL, "_blank");
+}
+
+</script>
+
+</body>
+</html>

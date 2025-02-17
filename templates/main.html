@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QALA - Viewing Room</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #000;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .title {
+      font-size: 64px;
+      font-weight: bold;
+      margin: 0;
+      letter-spacing: 10px;
+    }
+
+    .dot-menu {
+      z-index: 20;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #00000076;
+      color: #fff;
+      transition: left 0.3s ease;
+      padding-top: 50px;
+      z-index: 10;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    /* Viewing Room Label */
+    .viewing-room-label {
+      text-align: center;
+      color: #000;
+      font-size: 36px;
+      font-family: 'Playfair Display', serif;
+      margin: 60px 0 40px;
+    }
+
+    /* Pinterest-Style Gallery */
+    .gallery {
+      column-count: 3;
+      column-gap: 20px;
+      padding: 0 20px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+  </style>
+  <script>
+    function toggleSidebar() {
+      var sidebar = document.getElementById('sidebar');
+      if (sidebar.style.left === '0px') {
+        sidebar.style.left = '-250px';
+      } else {
+        sidebar.style.left = '0px';
+      }
+    }
+    function openModal(src) {
+      var modal = document.getElementById('modal');
+      var modalImg = document.getElementById('modal-img');
+      modal.style.display = 'flex';
+      modalImg.src = src;
+    }
+    function closeModal() {
+      var modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="title">QALA</div>
+  </header>
+  <div class="dot-menu" onclick="toggleSidebar()">⋮</div>
+  <div class="sidebar" id="sidebar" onclick="toggleSidebar()">
+    <ul>
+      <li>Viewing Room</li>
+      <li>Artists</li>
+      <li>Contact</li>
+    </ul>
+  </div>
+
+  <!-- Centered Viewing Room Label -->
+  <div class="viewing-room-label">Viewing Room</div>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <img src="https://i.pinimg.com/736x/25/10/ad/2510ad882724fbb3743324e1b4ae9cce.jpg" alt="Art 1" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/e0/f3/2f/e0f32f14e9064f83f21b9e1701072fe8.jpg" alt="Art 2" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/19/48/23/1948230338976558436d891b0536528a.jpg" alt="Art 3" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/236x/87/c5/2c/87c52c5fb245a80a1f4694f7323295a7.jpg" alt="Art 4" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/0a/36/18/0a3618d7a5c19fbccde2aa9c4db8ffdf.jpg" alt="Art 5" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/7e/31/39/7e313959be39c85bf1006326d02db7c4.jpg" alt="Art 6" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/7e/90/3f/7e903f65e522f2832435acf45a6a2049.jpg" alt="Art 7" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/e5/8d/bf/e58dbf952c8bd05833849d688bdc6bef.jpg" alt="Art 8" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/c3/c3/27/c3c3275d3b966168f3c6e5c90d63d73e.jpg" alt="Art 9" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/236x/ee/8f/62/ee8f62b168540e94bf4307e9090e853d.jpg" alt="Art 10" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/474x/9d/78/3f/9d783f0674b23c503df7c09915b6ef75.jpg" alt="Art 11" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/82/9e/d2/829ed21ab9869c7f0702d3e2e4290aec.jpg" alt="Art 12" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/4f/d5/0d/4fd50d6edfc4e0d479f63dbcc2820c62.jpg" alt="Art 13" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/236x/a5/b8/aa/a5b8aabc6ffbd331a249ad0f003fbe5d.jpg" alt="Art 14" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/236x/0f/0b/ad/0f0bad414f833316cbf89eaf54e00d24.jpg" alt="Art 15" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/1e/2e/df/1e2edfc8b2f4821ba59fc7c2914fb539.jpg" alt="Art 16" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/236x/e1/ba/85/e1ba859dfc0042cd59ca34301f5e6c15.jpg" alt="Art 17" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/dc/77/a0/dc77a0c2086fb711dce44ad0a7ff1325.jpg" alt="Art 18" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/6d/4f/29/6d4f29f0fd7ba8dc02259ff9488510a0.jpg" alt="Art 19" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/e5/9f/36/e59f360e99ed07c3469f76edcde60f4e.jpg" alt="Art 20" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/236x/a4/88/70/a48870b75469bc777ff761f4392d831d.jpg" alt="Art 21" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/9c/a3/0f/9ca30f4a52e034037200a9655d2948c8.jpg" alt="Art 22" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/f5/0c/02/f50c0255a25ea12d96e718d459d17471.jpg" alt="Art 23" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/474x/4f/a5/c5/4fa5c532ba44b68248163b6239eb7579.jpg" alt="Art 24" onclick="openModal(this.src)">
+    <img src="https://i.pinimg.com/736x/c6/02/b5/c602b5cf7a4ea7eff90f1dbfdb267d7e.jpg" alt="Art 25" onclick="openModal(this.src)">
+
+
+  </section>
+  <div class="modal" id="modal" onclick="closeModal()">
+    <img id="modal-img" src="" alt="Expanded Art">
+  </div>
+</body>
+</html>
+

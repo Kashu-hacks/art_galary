@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Screenshot 2025-02-14 221343.png') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Cinzel+Decorative&family=Poppins:wght@300;400;700&family=Cormorant+Garamond:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Prata&family=Marcellus&family=Kaushan+Script&family=Alex+Brush&family=Elsie&family=Quintessential&family=Italianno&display=swap" rel="stylesheet">
+    <title>QALA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+      body {
+        background: url("{{ url_for('static', filename='images/home.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+      }
+    </style>    
+  </head>
+  <body>
+    <div class="centered-container">
+      <div class="top">
+        <h1>Welcome to QALA</h1>
+        <p style="font-family: 'Cormorant Garamond', serif;">Where Every Brush Tells a Story</p>
+      </div>
+
+      <a class="get-started-btn" href="{{ url_for('home') }}">
+        Get Started
+        <div class="circle-images">
+          <img src="{{ url_for('static', filename='images/pic1.png') }}" alt="Pic 1" />
+          <img src="{{ url_for('static', filename='images/pic2.png') }}" alt="Pic 2" />
+          <img src="{{ url_for('static', filename='images/pic3.png') }}" alt="Pic 3" />
+          <img src="{{ url_for('static', filename='images/pic4.png') }}" alt="Pic 4" />
+        </div>
+      </a>
+    </div>
+  </body>
+</html>
