@@ -20,7 +20,7 @@
             align-items: center;
             height: 100vh;
             font-family: 'Arial', sans-serif;
-            background: url("{{ url_for('static', filename='images/pic.jpg') }}") no-repeat center center fixed;
+            background: url("{{ url_for('static', filename='images/pic.jpg') }}") no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -60,7 +60,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: transparent; 
+            background: transparent;
         }
 
         .card-side.back {
@@ -133,7 +133,6 @@
             text-decoration: underline;
         }
 
-
     </style>
 </head>
 
@@ -142,35 +141,63 @@
     <div class="container">
         <div class="flip-container">
             <div class="card" id="card">
+                <!-- Sign Up Form -->
                 <div class="card-side front">
                     <h1>Sign Up</h1>
-                    <div class="input-container">
-                        <i class="fas fa-user icon"></i>
-                        <input type="text" placeholder="Enter Your Name" />
-                    </div>
-                    <div class="input-container">
-                        <i class="fas fa-envelope icon"></i>
-                        <input type="email" placeholder="Enter Email" />
-                    </div>
-                    <div class="input-container">
-                        <input type="password" placeholder="Create Password" />
-                        <i class="fas fa-eye toggle-password"></i>
-                    </div>
-                    <button onclick="flipCard()">Sign Up</button>
+                    <!-- Form Submission -->
+                    <form action="{{ url_for('signup') }}" method="POST">
+                        <!-- Display flash messages -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                <div class="flash-messages">
+                                    {% for category, message in messages %}
+                                        <div class="alert {{ category }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <!-- Name Input -->
+                        <div class="input-container">
+                            <i class="fas fa-user icon"></i>
+                            <input type="text" name="name" placeholder="Enter Your Name" required />
+                        </div>
+                        
+                        <!-- Email Input -->
+                        <div class="input-container">
+                            <i class="fas fa-envelope icon"></i>
+                            <input type="email" name="email" placeholder="Enter Email" required />
+                        </div>
+                        
+                        <!-- Password Input -->
+                        <div class="input-container">
+                            <input type="password" name="password" placeholder="Create Password" required id="password"/>
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit">Sign Up</button>
+                    </form>
+
                     <span class="switch-link" onclick="flipCard()">Already have an account? Sign In</span>
                 </div>
 
+                <!-- Sign In Form -->
                 <div class="card-side back">
                     <h1>Sign In</h1>
-                    <div class="input-container">
-                        <i class="fas fa-envelope icon"></i>
-                        <input type="email" placeholder="Enter Email" />
-                    </div>
-                    <div class="input-container">
-                        <input type="password" placeholder="Enter Password" />
-                        <i class="fas fa-eye toggle-password"></i>
-                    </div>
-                    <button onclick="flipCard()">Sign In</button>
+                    <form action="{{ url_for('login') }}" method="POST">
+                        <div class="input-container">
+                            <i class="fas fa-envelope icon"></i>
+                            <input type="email" name="email" placeholder="Enter Email" required />
+                        </div>
+                        <div class="input-container">
+                            <input type="password" name="password" placeholder="Enter Password" required />
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                        </div>
+                        <button type="submit">Sign In</button>
+                    </form>
                     <span class="switch-link" onclick="flipCard()">Don't have an account? Sign Up</span>
                 </div>
             </div>
@@ -178,6 +205,22 @@
     </div>
 
     <script>
+        // Function to toggle password visibility
+        function togglePassword() {
+            var password = document.getElementById('password');
+            var toggleIcon = document.querySelector('.toggle-password');
+            if (password.type === "password") {
+                password.type = "text";
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                password.type = "password";
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Function to flip the card between sign up and sign in forms
         function flipCard() {
             document.getElementById('card').classList.toggle('is-flipped');
         }

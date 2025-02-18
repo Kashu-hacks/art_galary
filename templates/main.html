@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QALA - Viewing Room</title>
+  <title>QALA~Viewing Room</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Screenshot 2025-02-14 221343.png') }}" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
@@ -58,7 +59,7 @@
       padding: 0;
     }
 
-    .sidebar ul li {
+    .sidebar ul a {
       padding: 15px;
       text-align: center;
       font-size: 24px;
@@ -143,9 +144,10 @@
   <div class="dot-menu" onclick="toggleSidebar()">⋮</div>
   <div class="sidebar" id="sidebar" onclick="toggleSidebar()">
     <ul>
-      <li>Viewing Room</li>
-      <li>Artists</li>
-      <li>Contact</li>
+      <a>Viewing Room</a>
+    <a>Contact</a>
+    <a>Artist</a>
+    <a href="{{ url_for('exhibition') }}">Exhibitions</a>
     </ul>
   </div>
 
