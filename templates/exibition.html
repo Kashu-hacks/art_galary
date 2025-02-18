@@ -292,55 +292,109 @@
   <div class="gallery">
     <!-- First Row -->
     <div class="gallery-item">
-      <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Image 1" />
-      <p onclick="showPopup('079 | STORIES ART GALLERY', '079 | STORIES ART GALLERY was established in 2018 as a space that caters to the needs of art, design and creativity. Since the inception, the gallery has been a platform for young contemporary artists while also hosting exhibitions of modern masters. Designed by Khushnu and Sönke Hoof, partners to Padmashree and Pritzker awardee B.V. Doshi, the 079 | Stories complex includes the art gallery, a workshop space and an amphitheatre.', '{{ url_for('static', filename='images/1.jpg') }}', 'https://079stories.com/')">
-        079 | STORIES ART GALLERY
-      </p>
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Image 1" />
+        <p onclick="showPopup(
+            '079 | STORIES ART GALLERY', 
+            '079 | STORIES ART GALLERY was established in 2018 as a space that caters to the needs of art, design and creativity. Since the inception, the gallery has been a platform for young contemporary artists while also hosting exhibitions of modern masters. Designed by Khushnu and Sönke Hoof, partners to Padmashree and Pritzker awardee B.V. Doshi, the 079 | Stories complex includes the art gallery, a workshop space and an amphitheatre.'
+        )">
+            079 | STORIES ART GALLERY
+        </p>
+        <a href="https://079stories.com/" target="_blank">
+            <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="079 | STORIES ART GALLERY">
+        </a>
     </div>
+
     <div class="gallery-item">
-      <img src="{{ url_for('static', filename='images/2.jpg') }}" alt="Image 2" />
-      <p onclick="showPopup('1x1 Art Gallery', 'Located in Dubai’s cultural district in Alserkal Avenue, 1X1 Art Gallery focuses on South Asian contemporary artists, whilst also nurturing local talent and artists based in the Middle East. The gallery is known for organising large scale projects, experiments and exhibitions in its space, and also runs a bookstore dedicated to South Asian art, culture and literature.', '{{ url_for('static', filename='images/2.jpg') }}', 'https://www.1x1artgallery.com/lander')">
-        1x1 Art Gallery
-      </p>
+        <img src="{{ url_for('static', filename='images/2.jpg') }}" alt="Image 2" />
+        <p onclick="showPopup(
+            '1x1 Art Gallery', 
+            'Located in Dubai’s cultural district in Alserkal Avenue, 1X1 Art Gallery focuses on South Asian contemporary artists, whilst also nurturing local talent and artists based in the Middle East. The gallery is known for organising large scale projects, experiments and exhibitions in its space, and also runs a bookstore dedicated to South Asian art, culture and literature.'
+        )">
+            1x1 Art Gallery
+        </p>
+        <a href="https://www.1x1artgallery.com/lander" target="_blank">
+            <img src="{{ url_for('static', filename='images/2.jpg') }}" alt="1x1 Art Gallery">
+        </a>
     </div>
+
     <div class="gallery-item">
-      <img src="{{ url_for('static', filename='images/3.jpg') }}" alt="Image 3" />
-      <p onclick="showPopup('Abir India', 'Abir India, an Ahmedabad-based non-profit foundation established in 2016 by natural dye expert Ruby Jagrut, is a beacon of artistic celebration and mentorship. Inspired by “Abir,” the vibrant hues synonymous with Indian festivals, the organization bridges the gap between emerging artists and the global art community. Through mentorship programs, curated exhibitions, prestigious awards, and innovative digital platforms, Abir India fosters opportunities for artistic growth and recognition. Since its inception, Abir India has supported over 1,000 artists and awarded 72 talents from more than 450 pin codes, shaping transformative careers and enriching the art world in India and beyond.', '{{ url_for('static', filename='images/3.jpg') }}', 'https://abirindia.org/')">
-        Abir India
-      </p>
+        <img src="{{ url_for('static', filename='images/3.jpg') }}" alt="Image 3" />
+        <p onclick="showPopup(
+            'Abir India', 
+            'Abir India, an Ahmedabad-based non-profit foundation established in 2016 by natural dye expert Ruby Jagrut, is a beacon of artistic celebration and mentorship. Inspired by “Abir,” the vibrant hues synonymous with Indian festivals, the organization bridges the gap between emerging artists and the global art community. Through mentorship programs, curated exhibitions, prestigious awards, and innovative digital platforms, Abir India fosters opportunities for artistic growth and recognition. Since its inception, Abir India has supported over 1,000 artists and awarded 72 talents from more than 450 pin codes, shaping transformative careers and enriching the art world in India and beyond.'
+        )">
+            Abir India
+        </p>
+        <a href="https://abirindia.org/" target="_blank">
+            <img src="{{ url_for('static', filename='images/3.jpg') }}" alt="Abir India">
+        </a>
     </div>
+
     <div class="gallery-item">
-      <img src="{{ url_for('static', filename='images/4.jpg') }}" alt="Image 4" />
-      <p onclick="showPopup('Aicon', 'Aicon is a New York based art gallery serving as a vital platform for modern and contemporary artists from South Asia, Middle East, Africa diaspora to realize their vision in a global, ever-shifting world. Along with in-depth focused solo shows, the gallery presents a programme of curated group exhibitions linking the contemporary with modern, to produce unexpected congruences, highlight multiple modernisms, and complexify the contemporary.', '{{ url_for('static', filename='images/4.jpg') }}', 'https://www.aicon.art/')">
-        Aicon
-      </p>
+        <img src="{{ url_for('static', filename='images/4.jpg') }}" alt="Image 4" />
+        <p onclick="showPopup(
+            'Aicon', 
+            'Aicon is a New York based art gallery serving as a vital platform for modern and contemporary artists from South Asia, Middle East, Africa diaspora to realize their vision in a global, ever-shifting world. Along with in-depth focused solo shows, the gallery presents a programme of curated group exhibitions linking the contemporary with modern, to produce unexpected congruences, highlight multiple modernisms, and complexify the contemporary.'
+        )">
+            Aicon
+        </p>
+        <a href="https://www.aicon.art/" target="_blank">
+            <img src="{{ url_for('static', filename='images/4.jpg') }}" alt="Aicon">
+        </a>
     </div>
+
     <!-- Second Row -->
     <div class="gallery-item">
-      <img src="{{ url_for('static', filename='images/5.jpeg') }}" alt="Image 5" />
-      <p onclick="showPopup('Akar Prakar', 'Founded in 2004 by Reena and Abhijit Lath, Akar Prakar is a modern and contemporary art gallery with spaces in New Delhi and Kolkata. As part of our gallery programming and extended engagements in the arts, Akar Prakar has hosted several visual art exhibitions through collaborations with international museums and curators, creating a space for indigenous representations of Indian modern and contemporary artists. Operating between its two galleries, Akar Prakar curates narratives drawn from the subcontinent’s modern and contemporary art movements, representing artists such as Ganesh Haloi, Jayashree Chakravarty, C. Douglas, Manish Pushkale, Debanjan Roy and Debasish Mukherjee, among others. Over the years, Akar Prakar has participated in art exhibitions at institutions and museums in different parts of the world.', '{{ url_for('static', filename='images/5.jpeg') }}', 'https://www.akarprakar.com/')">
-        Akar Prakar
-      </p>
+        <img src="{{ url_for('static', filename='images/5.jpeg') }}" alt="Image 5" />
+        <p onclick="showPopup(
+            'Akar Prakar', 
+            'Founded in 2004 by Reena and Abhijit Lath, Akar Prakar is a modern and contemporary art gallery with spaces in New Delhi and Kolkata. As part of our gallery programming and extended engagements in the arts, Akar Prakar has hosted several visual art exhibitions through collaborations with international museums and curators, creating a space for indigenous representations of Indian modern and contemporary artists. Operating between its two galleries, Akar Prakar curates narratives drawn from the subcontinent’s modern and contemporary art movements, representing artists such as Ganesh Haloi, Jayashree Chakravarty, C. Douglas, Manish Pushkale, Debanjan Roy and Debasish Mukherjee, among others. Over the years, Akar Prakar has participated in art exhibitions at institutions and museums in different parts of the world.'
+        )">
+            Akar Prakar
+        </p>
+        <a href="https://www.akarprakar.com/" target="_blank">
+            <img src="{{ url_for('static', filename='images/5.jpeg') }}" alt="Akar Prakar">
+        </a>
+    </div>
+</div>
+  
     </div>
     <div class="gallery-item">
       <img src="{{ url_for('static', filename='images/6.jpg') }}" alt="Image 6" />
-      <p onclick="showPopup('Apparao Galleries', 'Apparao Galleries is a leading Indian gallery with outposts in Chennai and New Delhi. Since its founding in 1983, the gallery has built a strong reputation for representing an exceptional range of modern and contemporary Indian artists. Along with organising compelling exhibitions, Apparao Galleries also runs a critically engaging and ambitious outreach programme to encourage academic research and international exchange.', '{{ url_for('static', filename='images/6.jpg') }}', 'https://www.instagram.com/apparaogalleriesindia/?hl=en')">
+      <p onclick="showPopup('Apparao Galleries', 'Apparao Galleries is a leading Indian gallery with outposts in Chennai and New Delhi. Since its founding in 1983, the gallery has built a strong reputation for representing an exceptional range of modern and contemporary Indian artists. Along with organising compelling exhibitions, Apparao Galleries also runs a critically engaging and ambitious outreach programme to encourage academic research and international exchange.')">
         Apparao Galleries
       </p>
+      <a href="https://www.instagram.com/apparaogalleriesindia/?hl=en" target="_blank">
+        <img src="{{ url_for('static', filename='images/6.jpg') }}" alt="Apparao Galleries Instagram">
+      </a>
     </div>
+    
     <div class="gallery-item">
       <img src="{{ url_for('static', filename='images/7.jpg') }}" alt="Image 7" />
-      <p onclick="showPopup('Archer Art Gallery', 'Archer Art Gallery started its journey as a small graphic studio in 1978. Over the years, its main focus has been to facilitate high-quality, limited-edition serigraphs and prints by some of India’s most influential artists, and it also exhibits a fine selection of original works by modern masters.', '{{ url_for('static', filename='images/7.jpg') }}', 'https://www.archerindia.com/')">
+      <p onclick="showPopup(
+        'Archer Art Gallery', 
+        'Archer Art Gallery started its journey as a small graphic studio in 1978. Over the years, its main focus has been to facilitate high-quality, limited-edition serigraphs and prints by some of India’s most influential artists, and it also exhibits a fine selection of original works by modern masters.'
+      )">
         Archer Art Gallery
       </p>
+      <a href="https://www.archerindia.com/" target="_blank">
+        <img src="{{ url_for('static', filename='images/7.jpg') }}" alt="Archer Art Gallery">
+      </a>
     </div>
+    
     <div class="gallery-item">
       <img src="{{ url_for('static', filename='images/8.jpeg') }}" alt="Image 8" />
-      <p onclick="showPopup('Art Alive Gallery', 'Established in 2001, Art Alive Gallery is committed to promoting emerging perspectives in Indian art and nurturing a culture of engagement among artists and art connoisseurs. The gallery presents a holistic showcase of contemporary, modern and emerging art from the country through its curated exhibitions, artist talks, and extensive research.', '{{ url_for('static', filename='images/8.jpeg') }}', 'https://www.artalivegallery.com/')">
-        Art Alive Gallery
+      <p onclick="showPopup(
+          'Art Alive Gallery', 
+          'Established in 2001, Art Alive Gallery is committed to promoting emerging perspectives in Indian art and nurturing a culture of engagement among artists and art connoisseurs. The gallery presents a holistic showcase of contemporary, modern and emerging art from the country through its curated exhibitions, artist talks, and extensive research.'
+      )">
+          Art Alive Gallery
       </p>
-    </div>
+      <a href="https://www.artalivegallery.com/" target="_blank">
+          <img src="{{ url_for('static', filename='images/8.jpeg') }}" alt="Art Alive Gallery">
+      </a>
   </div>
+  
 
   <!-- Pop-up Card -->
   <div class="overlay" id="overlay" onclick="hidePopup()"></div>
