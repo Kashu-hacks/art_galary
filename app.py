@@ -57,7 +57,6 @@ def signup():
     
     return jsonify({"message": "Signup successful! Please login."}), 200
 
-
 # **Render Login Page**
 @app.route('/login', methods=['POST'])
 def login():
@@ -78,16 +77,17 @@ def login():
 def logout():
     session.pop('user_id', None)
     session.pop('user_name', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))  # Redirect to home page after logout
 
-# **Create Database**
+# **Main Page Route**
+@app.route('/main')
+def main_page():
+    if 'user_id' not in session:
+        return redirect(url_for('index'))  # Redirect to home page if not logged in
+    return render_template('main.html', user_name=session['user_name'])
+
+# **Create Database and Run the App**
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Create tables if they don't exist
     app.run(debug=True)
-
-@app.route('/main')
-def main_page():
-    if 'user_id' not in session:
-        return redirect(url_for('index'))  # Redirect to sign-in page if not logged in
-    return render_template('main.html', user_name=session['user_name'])
